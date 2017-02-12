@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ContatoStore from '../Store/ContatoStore';
 import ImagePicker from 'react-native-image-picker';
 import Styles from './NovoContato.css';
 import Foto from './Foto';
@@ -16,6 +17,7 @@ export default class NovoContato extends Component{
 		super(props);
 
 		this.state = {
+			id: null,
 			nome: '',
 			email: '',
 			telefone: '',
@@ -23,6 +25,24 @@ export default class NovoContato extends Component{
 				uri: null
 			}
 		};
+
+		this.props.setCallBack(() => {
+			const { nome, telefone, email } = this.state;
+
+			if(nome == ''){
+				return Promise.reject('Compo de nome é obrigatório!');
+			}
+
+			if(email == ''){
+				return Promise.reject('Compo de email é obrigatório!');
+			}
+
+			if(email == ''){
+				return Promise.reject('Compo de telefone é obrigatório!');
+			}
+
+			return ContatoStore.salvar(this.state);
+		});
 	}
 
 	render(){
