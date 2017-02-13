@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContatoStore from '../Store/ContatoStore';
 import Styles from './Agenda.css';
 import { Actions } from 'react-native-router-flux';
+import Busca from './Busca';
 import ContatoRow from './ContatoRow';
 
 import {
@@ -17,8 +18,11 @@ export default class Agenda extends Component{
 
 
  		this.state = {
+ 			busca: '',
  			contatos : []
  		};
+
+		this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 	}
 
 	componentDidMount() {
@@ -28,9 +32,22 @@ export default class Agenda extends Component{
 	}
 
 	contatos() {
-		const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		const { busca, contatos } = this.state;
 
-		return dataSource.cloneWithRows(this.state.contatos);
+		const buscaLower = busca.toLowerCase();
+
+		const filtered = contatos.filter(contato => {
+
+			if(buscaLower == ''){
+				return true;
+			}
+
+			return contato.nome.toLowerCase().indexOf(buscaLower) !== -1 ||
+				contato.email.toLowerCase().indexOf(buscaLower) !== -1 ||
+				contato.telefone.toLowerCase().indexOf(buscaLower) !== -1;
+		});
+
+		return this.dataSource.cloneWithRows(filtered);
 	}
 
 	renderContato(contato){
@@ -40,19 +57,27 @@ export default class Agenda extends Component{
 	}
 
 	list(){
-		if(this.state.contatos.length === 0){
-			return <Text>Nenhum contato registrado.</Text>;
+		const contatos = this.contatos();
+
+		if(contatos.getRowCount() === 0){
+			return <Text style={{ padding: 20 }}>Nenhum contato registrado.</Text>;
 		}
 
 		return <ListView
 			style={Styles.list}
 			renderRow={contato => this.renderContato(contato) }
-			dataSource={this.contatos()}
+			dataSource={contatos}
 		/>;
 	}
 
 	render(){
+		const { busca } = this.state;
+
 		return <View style={Styles.container}>
+			<Busca
+				busca={busca}
+				onChange={busca => { this.setState({ busca }) }}
+			/>
 			{ this.list() }
 		</View>
 	}
