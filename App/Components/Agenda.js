@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContatoStore from '../Store/ContatoStore';
 import Styles from './Agenda.css';
 import { Actions } from 'react-native-router-flux';
+import ContatoRow from './ContatoRow';
 
 import {
 	View,
@@ -28,24 +29,31 @@ export default class Agenda extends Component{
 
 	contatos() {
 		const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-		console.log(this.state.contatos);
+
 		return dataSource.cloneWithRows(this.state.contatos);
+	}
+
+	renderContato(contato){
+		return (
+			<ContatoRow key={contato.id} contato={contato} />
+		);
 	}
 
 	list(){
 		if(this.state.contatos.length === 0){
-			return null;
+			return <Text>Nenhum contato registrado.</Text>;
 		}
 
 		return <ListView
+			style={Styles.list}
+			renderRow={contato => this.renderContato(contato) }
 			dataSource={this.contatos()}
-			renderRow={contato => { return <Text>{ contato.nome }</Text>}}
 		/>;
 	}
 
 	render(){
 		return <View style={Styles.container}>
-			{this.list()}
+			{ this.list() }
 		</View>
 	}
 }
