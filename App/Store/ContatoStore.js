@@ -1,6 +1,6 @@
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native';
-import uniqueId from 'react-native-unique-id';
+import uniqueId from 'react-native-uuid';
 
 const storage = new Storage({
     size: 1000,
@@ -11,13 +11,9 @@ const storage = new Storage({
 
 export default class ContatoStore{
 
-	static async salvar(contato){
+	static salvar(contato){
 		if(contato.id == null){
-			try{
-				contato.id = await uniqueId();
-			} catch (error) {
-				console.error(error);
-			}
+			contato.id = uniqueId.v1();
 		}
 
 		return storage.save({
