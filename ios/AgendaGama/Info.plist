@@ -52,5 +52,9 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used for contact avatar image</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used for contact avatar image</string>
 </dict>
 </plist>
