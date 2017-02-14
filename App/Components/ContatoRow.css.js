@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
     padding: 10,
+    backgroundColor: 'white',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#cccccc',
     flexDirection:'row',

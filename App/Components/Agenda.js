@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import ContatoStore from '../Store/ContatoStore';
 import Styles from './Agenda.css';
 import { Actions } from 'react-native-router-flux';
@@ -8,7 +9,8 @@ import ContatoRow from './ContatoRow';
 import {
 	View,
 	Text,
-	ListView
+	ListView,
+	TouchableHighlight
 } from 'react-native';
 
 export default class Agenda extends Component{
@@ -63,10 +65,22 @@ export default class Agenda extends Component{
 			return <Text style={{ padding: 20 }}>Nenhum contato registrado.</Text>;
 		}
 
-		return <ListView
+		return <SwipeListView
 			style={Styles.list}
-			renderRow={contato => this.renderContato(contato) }
 			dataSource={contatos}
+			renderRow={contato => this.renderContato(contato) }
+			renderHiddenRow={ data => (
+                <View>
+                	<TouchableHighlight style={Styles.editar}>
+                    	<Text style={Styles.label}>Editar</Text>
+                	</TouchableHighlight>
+                	<TouchableHighlight style={Styles.excluir}>
+                    	<Text style={Styles.label}>Excluir</Text>
+                	</TouchableHighlight>
+                </View>
+            )}
+            leftOpenValue={100}
+            rightOpenValue={-100}
 		/>;
 	}
 
