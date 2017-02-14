@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Scene, Router, Actions, ActionConst } from 'react-native-router-flux';
 import Agenda from './Agenda';
-import NovoContato from './NovoContato';
+import FormContato from './FormContato';
 
 import {
   View,
@@ -27,14 +27,14 @@ export default class Main extends Component {
             title="Agenda"
             initial={true}
             rightTitle="NOVO"
-            onRight={() => { Actions.novoContato() }}
+            onRight={() => { Actions.formContato() }}
             rightButtonTextStyle={buttonsStyle}
             type={ActionConst.RESET}
           />
           <Scene
-            key="novoContato"
+            key="formContato"
             title="Novo Contato"
-            component={NovoContato}
+            component={FormContato}
             backTitle="VOLTAR"
             backButtonImage={null}
             backButtonTextStyle={buttonsStyle}

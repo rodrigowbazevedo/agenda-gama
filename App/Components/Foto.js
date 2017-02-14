@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ImagePicker from 'react-native-image-picker';
-import Styles from './NovoContato.css';
 
 import {
 	View,

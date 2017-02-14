@@ -64,6 +64,10 @@ export default class Agenda extends Component{
 	}
 
 	editarContato(contato){
+		Actions.formContato({
+			title: 'Editar contato',
+			contato: contato
+		});
 	}
 
 	excluirContato(contato){
@@ -99,7 +103,10 @@ export default class Agenda extends Component{
                 	</TouchableHighlight>
                 	<TouchableHighlight
                 		style={[Styles.buttons, Styles.editar]}
-                		onPress={() => { this.editarContato(contato); }}
+                		onPress={() => {
+                			this.editarContato(contato);
+                			rowMap[`${secId}${rowId}`].closeRow();
+                		}}
                 	>
                     	<Text style={Styles.label}>Editar</Text>
                 	</TouchableHighlight>
