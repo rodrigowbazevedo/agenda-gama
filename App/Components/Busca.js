@@ -14,11 +14,12 @@ export default class Busca extends Component{
 		return (
 			<View style={Styles.container}>
 				<TextInput
-					placeholder="Buscar contato"
+					placeholder="Buscar contato..."
 					value={ busca }
 					onChangeText={busca => {
 						onChange(busca);
 					}}
+					style={Styles.input}
 				/>
 			</View>
 		);

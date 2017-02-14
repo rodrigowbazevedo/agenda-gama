@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   },
   input: {
     // width: 250,
-    height: 40
+    height: 40,
+    margin: 10
   },
   page: {
     paddingBottom: 300,
