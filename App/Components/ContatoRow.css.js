@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#cccccc',
     flexDirection:'row',
     flexWrap:'wrap',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image:{
     width: 50,
