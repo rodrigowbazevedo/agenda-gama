@@ -48,31 +48,33 @@ export default class NovoContato extends Component{
 	render(){
 		const { nome, telefone, email, foto } = this.state;
 
-		return <View style={Styles.container}>
-			<ScrollView style={{ alignSelf: 'stretch' }}>
-				<TextInput
-					value={nome}
-					onChangeText={nome => { this.setState({ nome }); }}
-					placeholder="Nome:"
-					style={Styles.input}
-				/>
-				<TextInput
-					value={telefone}
-					onChangeText={telefone => { this.setState({ telefone }); }}
-					placeholder="Telefone:"
-					style={Styles.input}
-				/>
-				<TextInput
-					value={email}
-					onChangeText={email => { this.setState({ email }); }}
-					placeholder="Email:"
-					style={Styles.input}
-				/>
-				<Foto
-					foto={foto}
-					onSelected={foto => { this.setState({ foto }); }}
-				/>
-			</ScrollView>
-		</View>
+		return (
+			<View style={Styles.container}>
+				<ScrollView style={{ alignSelf: 'stretch' }}>
+					<TextInput
+						value={nome}
+						onChangeText={nome => { this.setState({ nome }); }}
+						placeholder='Nome do contato...'
+						style={Styles.input}
+					/>
+					<TextInput
+						value={telefone}
+						onChangeText={telefone => { this.setState({ telefone }); }}
+						placeholder='Telefone....'
+						style={Styles.input}
+					/>
+					<TextInput
+						value={email}
+						onChangeText={email => { this.setState({ email }); }}
+						placeholder='Email...'
+						style={Styles.input}
+					/>
+					<Foto
+						foto={foto}
+						onSelected={foto => { this.setState({ foto }); }}
+					/>
+				</ScrollView>
+			</View>
+		);
 	}
 }
