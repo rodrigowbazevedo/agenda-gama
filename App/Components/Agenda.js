@@ -10,7 +10,8 @@ import {
 	View,
 	Text,
 	ListView,
-	TouchableHighlight
+	TouchableHighlight,
+	Alert
 } from 'react-native';
 
 export default class Agenda extends Component{
@@ -28,6 +29,10 @@ export default class Agenda extends Component{
 	}
 
 	componentDidMount() {
+		this.loadContatos();
+	}
+
+	loadContatos(){
 		ContatoStore.getAll().then(contatos => {
 			this.setState({ contatos });
 		});
@@ -58,6 +63,22 @@ export default class Agenda extends Component{
 		);
 	}
 
+	editarContato(contato){
+		Actions.formContato({
+			title: 'Editar contato',
+			contato: contato
+		});
+	}
+
+	excluirContato(contato){
+		ContatoStore.excluir(contato.id)
+			.then(() => {
+				this.loadContatos();
+			}).catch(error => {
+				Alert.alert('Erro!', error);
+			});
+	}
+
 	list(){
 		const contatos = this.contatos();
 
@@ -69,18 +90,32 @@ export default class Agenda extends Component{
 			style={Styles.list}
 			dataSource={contatos}
 			renderRow={contato => this.renderContato(contato) }
-			renderHiddenRow={ data => (
+			renderHiddenRow={ (contato, secId, rowId, rowMap) => (
                 <View>
-                	<TouchableHighlight style={Styles.editar}>
-                    	<Text style={Styles.label}>Editar</Text>
-                	</TouchableHighlight>
-                	<TouchableHighlight style={Styles.excluir}>
+                	<TouchableHighlight
+                		style={[Styles.buttons, Styles.excluir]}
+                		onPress={() => {
+                			this.excluirContato(contato);
+                			rowMap[`${secId}${rowId}`].closeRow();
+                		}}
+                	>
                     	<Text style={Styles.label}>Excluir</Text>
+                	</TouchableHighlight>
+                	<TouchableHighlight
+                		style={[Styles.buttons, Styles.editar]}
+                		onPress={() => {
+                			this.editarContato(contato);
+                			rowMap[`${secId}${rowId}`].closeRow();
+                		}}
+                	>
+                    	<Text style={Styles.label}>Editar</Text>
                 	</TouchableHighlight>
                 </View>
             )}
             leftOpenValue={100}
             rightOpenValue={-100}
+            previewFirstRow={true}
+            previewOpenValue={-100}
 		/>;
 	}
 

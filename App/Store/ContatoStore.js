@@ -24,6 +24,13 @@ export default class ContatoStore{
 		});
 	}
 
+	static excluir(id){
+		return storage.remove({
+		    key: 'contato',
+		    id: id
+		});
+	}
+
 	static getAll(){
 		return storage.getAllDataForKey('contato')
 			.then(contatos => contatos.sort((a, b) => {

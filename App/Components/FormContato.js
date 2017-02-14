@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ContatoStore from '../Store/ContatoStore';
 import ImagePicker from 'react-native-image-picker';
-import Styles from './NovoContato.css';
+import Styles from './FormContato.css';
 import Foto from './Foto';
 
 import {
@@ -11,12 +11,12 @@ import {
 	TextInput
 } from 'react-native';
 
-export default class NovoContato extends Component{
+export default class FormContato extends Component{
 
 	constructor(props){
 		super(props);
 
-		this.state = {
+		this.state = props.contato || {
 			id: null,
 			nome: '',
 			email: '',
