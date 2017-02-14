@@ -9,19 +9,21 @@ const styles = StyleSheet.create({
   list: {
     alignSelf: 'stretch'
   },
-  editar: {
-  	alignSelf: 'flex-start',
-  	backgroundColor: 'green',
+  buttons: {
+  	alignItems: 'center',
+	bottom: 0,
+	justifyContent: 'center',
+	position: 'absolute',
+	top: 0,
   	height: 70,
   	width: 100,
-  	padding: 20
+  },
+  editar: {
+  	backgroundColor: 'green',
+  	right: 0
   },
   excluir: {
-  	alignSelf: 'flex-end',
   	backgroundColor: 'red',
-  	height: 70,
-  	width: 100,
-  	padding: 20
   },
   label: {
   	color: 'white',
