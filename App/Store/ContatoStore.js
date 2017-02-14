@@ -25,6 +25,9 @@ export default class ContatoStore{
 	}
 
 	static getAll(){
-		return storage.getAllDataForKey('contato');
+		return storage.getAllDataForKey('contato')
+			.then(contatos => contatos.sort((a, b) => {
+				return a.nome.localeCompare(b.nome);
+			}));
 	}
 }
